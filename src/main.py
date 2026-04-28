@@ -1,8 +1,8 @@
 import random
 from pydantic import BaseModel
 from fastapi import FastAPI
-app = FastAPI()
 
+app = FastAPI()
 
 
 class Estudante(BaseModel):
@@ -20,18 +20,23 @@ def read_root():
 async def root():
     return {"message": "Hello Word"}
 
+
 @app.get("/funcaoteste")
 async def funcaoteste():
     return {"teste": True, "num_aleatorio": random.randint(0, 50000)}
+
 
 @app.get("/estudantes/cadastro")
 async def create_estudante(estudante: Estudante):
     return estudante
 
+
 @app.get("/estudantes/update/{id_estudante}")
 async def update_estudante(id_estudante: int):
     return id_estudante > 0
 
+
+# 🔥 CORREÇÃO AQUI (nome da função)
 @app.get("/estudantes/delete/{id_estudante}")
-async def delete_item(id_estudante: int):
+async def delete_estudante(id_estudante: int):
     return id_estudante > 0
